@@ -9,7 +9,10 @@ def ImgforPDF(img_path):
     pdf_path = os.path.join(img_path,'pdf_files')
     print(pdf_path + '\n')
     if pdf_path not in glob.glob(os.path.join(img_path,'*')):
-        os.mkdir(pdf_path)
+        try: 
+            os.mkdir(pdf_path)
+        except:
+            print('The directory is invalid! \nRestart the program and try again.')
 
     manga_path = sorted(glob.glob(os.path.join(img_path,'*')), key=len)
     for folder in manga_path:
@@ -45,11 +48,14 @@ def ImgforPDF(img_path):
         if check == True:
             continue
         if images:
-            pdf_data = img2pdf.convert(images)
-            with open(pdf_name, "wb") as file:
-                file.write(pdf_data)
+            try:
+                pdf_data = img2pdf.convert(images) 
+                with open(pdf_name, "wb") as file:
+                    file.write(pdf_data) 
+            except:
+                print ('Unable to convert images ('+pdf_name+') due to one or more images have problem')  
     return   
 
 manga_path = input('Enter the Directory: ')
 ImgforPDF(manga_path)
-input('Complete\nPress enter to close')
+input('Complete \nPress enter to close')
