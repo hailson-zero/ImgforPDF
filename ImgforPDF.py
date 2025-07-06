@@ -7,7 +7,7 @@ from natsort import os_sorted
 def ImgforPDF(img_path):
     fse = sys.getfilesystemencoding()
 
-    pdf_path = os.path.join(img_path,'pdf_files')
+    pdf_path = os.path.join(img_path,'pdf_files_I2P')
     print(pdf_path + '\n')
     if pdf_path not in glob.glob(os.path.join(img_path,'*')):
         try: 
